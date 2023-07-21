@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
+             xmlns:local="clr-namespace:Sublayers_Maui_Maps"
+             x:Class="Sublayers_Maui_Maps.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <map:SfMaps Margin="5">
+            <map:SfMaps.Layer>
+                <!--Shape sublayer-->
+                <map:MapShapeLayer ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json">
+                    <map:MapShapeLayer.Sublayers>
+                        <map:MapShapeSublayer ShapesSource="https://cdn.syncfusion.com/maps/map-data/africa.json" 
+                                              ShapeFill="LightBlue"
+                                              ShapeStroke="Blue"
+                                              ShapeStrokeThickness="2"
+                                              ShapeColorValuePath="DensityLevel"
+                                              PrimaryValuePath="State"
+                                              ShapeDataField="name"
+                                              DataSource="{Binding Data}">
+                            <map:MapShapeSublayer.ColorMappings>
+                                <map:EqualColorMapping Value="High" Color="Red" />
+                                <map:EqualColorMapping Value="Low" Color="Green" />
+                            </map:MapShapeSublayer.ColorMappings>
+                        </map:MapShapeSublayer>
+
+                        <!--Vector layer-->
+                        <map:MapLineLayer AnimationDuration="3000">
+                            <map:MapLineLayer.Lines>
+                                <map:MapLine Stroke="Red">
+                                    <map:MapLine.From>
+                                        <map:MapLatLng Latitude="28.7041"
+                                               Longitude="77.1025" />
+                                    </map:MapLine.From>
+                                    <map:MapLine.To>
+                                        <map:MapLatLng Latitude="56.1304"
+                                               Longitude="-106.3468" />
+                                    </map:MapLine.To>
+                                </map:MapLine>
+                                <map:MapLine Stroke="Green">
+                                    <map:MapLine.From>
+                                        <map:MapLatLng Latitude="28.7041"
+                                               Longitude="77.1025" />
+                                    </map:MapLine.From>
+                                    <map:MapLine.To>
+                                        <map:MapLatLng Latitude="-9.1900"
+                                               Longitude="-75.0152" />
+                                    </map:MapLine.To>
+                                </map:MapLine>
+                                <map:MapLine Stroke="Orange">
+                                    <map:MapLine.From>
+                                        <map:MapLatLng Latitude="28.7041"
+                                               Longitude="77.1025" />
+                                    </map:MapLine.From>
+                                    <map:MapLine.To>
+                                        <map:MapLatLng Latitude="61.5240"
+                                               Longitude="105.3188" />
+                                    </map:MapLine.To>
+                                </map:MapLine>
+                            </map:MapLineLayer.Lines>
+                        </map:MapLineLayer>
+                    </map:MapShapeLayer.Sublayers>
+                </map:MapShapeLayer>
+
+            </map:SfMaps.Layer>
+        </map:SfMaps>
+    </ContentPage.Content>
+
+</ContentPage>
